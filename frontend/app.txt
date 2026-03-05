@@ -1,0 +1,11 @@
+In JavaScript, localStorage is a global object provided by the browser.
+ GET is the default method of fetch().
+
+Summary table
+Method	Body needed?	Headers needed?
+GET	    ❌ No	            ❌ Usually No
+POST	✅ Yes	            ✅ Yes (Content-Type: application/json)
+PUT	    ✅ Yes	            ✅ Yes (Content-Type: application/json)
+DELETE	❌ Usually No	    ❌ Usually No
+
+We use await whenever we want the resolved value of a Promise instead of the Promise itself
