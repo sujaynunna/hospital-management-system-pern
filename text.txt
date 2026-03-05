@@ -1,0 +1,42 @@
+When Natural Keys ARE Used in Industry
+Sometimes used when:
+value never changes
+globally unique
+meaningful identity
+Examples:
+Aadhaar number
+Passport number
+ISBN
+Vehicle VIN
+Even then many systems still use surrogate ID internally.
+
+If professor asks:
+Why did you use SERIAL instead of natural key?
+
+You say:
+"I used surrogate keys for stable identity and efficient relationships,
+ while enforcing real-world uniqueness using constraints like UNIQUE."
+
+
+ Foreign keys are used to:
+
+maintain referential integrity
+
+model relationships
+
+enforce data consistency
+
+
+🧠 Real System Design Idea Here
+
+Your design uses:
+
+Users → base entity
+Patients → specialized entity
+
+
+This is called:
+
+👉 entity specialization / ISA relationship
+
+Very good DB design.
