@@ -10,7 +10,8 @@ function Bills() {
   }, []);
 
   const fetchBills = async () => {
-    const data = await getBills();
+     const userId=localStorage.getItem("userId");
+    const data = await getBills(userId);
     setBills(data);
   };
 

@@ -9,7 +9,8 @@ function MedicalRecords() {
   }, []);
 
   const fetchRecords = async () => {
-    const data = await getMedicalRecords();
+    const userId=localStorage.getItem("userId");
+    const data = await getMedicalRecords(userId);
     setRecords(data);
   };
 

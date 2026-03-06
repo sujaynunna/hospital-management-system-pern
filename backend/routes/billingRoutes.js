@@ -3,8 +3,14 @@ const router = express.Router();
 const pool = require("../db");
 
 // Get bills
-router.get("/", async (req, res) => {
-  const result = await pool.query("SELECT * FROM bills");
+router.get("/bills/:userId", async (req,res)=>{
+  const { userId } = req.params;
+
+  const result = await pool.query(
+    "SELECT * FROM bills WHERE patient_id=$1",
+    [userId]
+  );
+
   res.json(result.rows);
 });
 

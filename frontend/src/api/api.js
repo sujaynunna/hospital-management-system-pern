@@ -59,15 +59,15 @@ export const updateAppointment = async (id, status) => {
 
 /* ================= MEDICAL RECORDS ================= */
 
-export const getMedicalRecords = async () => {
-  const response = await fetch(`${API_URL}/medical-records`);
+export const getMedicalRecords = async (userId) => {
+  const response = await fetch(`${API_URL}/medical-records/${userId}`);
   return response.json();
 };
 
 /* ================= PRESCRIPTIONS ================= */
 
-export const getPrescriptions = async () => {
-  const response = await fetch(`${API_URL}/prescriptions`);
+export const getPrescriptions = async (userId) => {
+  const response = await fetch(`${API_URL}/prescriptions/${userId}`);
   return response.json();
 };
 
@@ -80,8 +80,8 @@ export const getLabTests = async (userId) => {
 
 /* ================= BILLING ================= */
 
-export const getBills = async () => {
-  const response = await fetch(`${API_URL}/bills`);
+export const getBills = async (userId) => {
+  const response = await fetch(`${API_URL}/bills/${userId}`);
   return response.json();
 };
 
