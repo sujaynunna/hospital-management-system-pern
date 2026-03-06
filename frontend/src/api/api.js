@@ -73,8 +73,8 @@ export const getPrescriptions = async () => {
 
 /* ================= LAB TESTS ================= */
 
-export const getLabTests = async () => {
-  const response = await fetch(`${API_URL}/lab-tests`);
+export const getLabTests = async (userId) => {
+  const response = await fetch(`${API_URL}/lab-tests/${userId}`);
   return response.json();
 };
 

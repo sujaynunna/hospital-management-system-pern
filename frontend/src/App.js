@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import Payments  from "./components/Payments";
+//import { Navigate } from "react-router-dom";
+//<Route path="/" element={<Navigate to="/login" />} /> 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PatientDashboard from "./pages/PatientDashboard";
@@ -12,16 +14,17 @@ import Prescriptions from "./pages/Prescriptions";
 import LabTests from "./pages/LabTests";
 import Bills from "./pages/Bills";
 import ManageDoctors from "./pages/ManageDoctors";
-
+// import Home from "./pages/Home.js";
 function App() {
   return (
     <Router>
       <Navbar />
-<Navbar />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
 
+      <Routes>
+        
+        <Route path="/login" element={<><Login /><Payments/></>}></Route>
+        <Route path="/register" element={<Register />} />
+        
         <Route
           path="/patient"
           element={

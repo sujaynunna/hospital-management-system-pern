@@ -4,37 +4,32 @@ import AppointmentForm from "../components/AppointmentForm";
 import AppointmentList from "../components/AppointmentList";
 
 function PatientDashboard() {
-const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState([]);
 
-useEffect(() => {
-fetchAppointments();
-}, []);
+  useEffect(() => {
+    fetchAppointments();
+  }, []);
 
-const fetchAppointments = async () => {
-const data = await getAppointments();
-setAppointments(data);
-};
+  const fetchAppointments = async () => {
+    const data = await getAppointments();
+    setAppointments(data);
+  };
 
-return (
-<div className="container mt-4">
+  return (
+    <div className="container mt-4">
+      <h2 className="mb-4">Patient Dashboard</h2>
 
-  <h2 className="mb-4">Patient Dashboard</h2>
+      <div className="row">
+        <div className="col-md-5">
+          <AppointmentForm refresh={fetchAppointments} />
+        </div>
 
-  <div className="row">
-
-    <div className="col-md-5">
-      <AppointmentForm refresh={fetchAppointments} />
+        <div className="col-md-7">
+          <AppointmentList appointments={appointments} />
+        </div>
+      </div>
     </div>
-
-    <div className="col-md-7">
-      <AppointmentList appointments={appointments} />
-    </div>
-
-  </div>
-
-</div>
-
-);
+  );
 }
 
 export default PatientDashboard;

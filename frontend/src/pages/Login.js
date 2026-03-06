@@ -62,7 +62,7 @@ function Login() {
 
           <p>
             Don't have an account? Register here{" "}
-            <Link to="/register">Register</Link>
+          <Link to="/register" className="text-decoration-none">Register</Link>
           </p>
         </form>
       </div>

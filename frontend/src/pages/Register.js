@@ -33,76 +33,71 @@ function Register() {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-5">
-          <div className="card shadow-lg">
-            <div className="card-body p-4">
-              <h3 className="text-center mb-4">Create Account</h3>
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <div className="card shadow-lg p-4" style={{ width: "400px" }}>
+        <h3 className="text-center mb-4" >Create Account</h3>
 
-              {error && <div className="alert alert-danger">{error}</div>}
+        {error && <div className="alert alert-danger">{error}</div>}
 
-              <form onSubmit={handleRegister}>
-                <div className="mb-3">
-                  <label className="form-label">Full Name</label>
-                  <input
-                    name="name"
-                    className="form-control"
-                    placeholder="Enter your name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">Email Address</label>
-                  <input
-                    name="email"
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">Password</label>
-                  <input
-                    name="password"
-                    type="password"
-                    className="form-control"
-                    placeholder="Enter password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label className="form-label">Select Role</label>
-                  <select
-                    name="role"
-                    className="form-select"
-                    value={formData.role}
-                    onChange={handleChange}
-                  >
-                    <option value="patient">Patient</option>
-                    <option value="doctor">Doctor</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
-
-                <button className="btn btn-success w-100 mb-4">Register</button>
-                <p className="text-center">
-                  Have an account? Login here <Link to="/login">Login</Link>
-                </p>
-              </form>
-            </div>
+        <form onSubmit={handleRegister}>
+          <div className="mb-3">
+            <label className="form-label">Full Name</label>
+            <input
+              name="name"
+              className="form-control"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
           </div>
-        </div>
+
+          <div className="mb-3">
+            <label className="form-label">Email Address</label>
+            <input
+              name="email"
+              type="email"
+              className="form-control"
+              placeholder="Enter email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              name="password"
+              type="password"
+              className="form-control"
+              placeholder="Enter password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="form-label">Select Role</label>
+            <select
+              name="role"
+              className="form-select"
+              value={formData.role}
+              onChange={handleChange}
+            >
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          <button className="btn btn-success w-100 mb-4 ">Register</button>
+
+          <p className="text-center ">
+            Have an account? Login here <Link to="/login" className="text-decoration-none">Login</Link>
+          </p>
+        </form>
       </div>
     </div>
   );
