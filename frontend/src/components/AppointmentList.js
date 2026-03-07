@@ -1,7 +1,7 @@
 function AppointmentList({ appointments }) {
   return (
     <div className="card p-4">
-      <h4 className="mb-3">My Appointments</h4>
+     
 
       <table className="table table-striped table-bordered">
         <thead>

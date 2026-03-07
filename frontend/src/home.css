@@ -1,7 +1,7 @@
-/* .home-container {
+.home-container {
   height: 100vh;
 
-  background-image: url("../images/hospital.png");
+  background-image: url("../../images/hospitalbackground.jpg");
 
   background-size: cover;
   background-position: center;
@@ -18,4 +18,4 @@
   background: rgba(0,0,0,0.4);
   padding: 40px;
   border-radius: 10px;
-} */
+}

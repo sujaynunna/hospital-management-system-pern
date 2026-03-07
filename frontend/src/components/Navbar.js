@@ -33,6 +33,9 @@ function Navbar() {
       <Link className="nav-link px-2" to="/doctor" style={{ color: "yellow", fontWeight: "bold" }}>
         Doctor
       </Link>
+      <Link className="nav-link px-2" to="/manage-doctors" style={{ color: "yellow", fontWeight: "bold" }}>
+        manage
+      </Link>
     </div>
 
     {/* 3. BUTTON - Right Side */}

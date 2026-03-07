@@ -34,7 +34,7 @@ function Register() {
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card shadow-lg p-4" style={{ width: "400px" }}>
+      <div className="card shadow-lg p-4" style={{ width: "35vw" }}>
         <h3 className="text-center mb-4" >Create Account</h3>
 
         {error && <div className="alert alert-danger">{error}</div>}

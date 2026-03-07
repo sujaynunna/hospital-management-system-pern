@@ -14,14 +14,14 @@ import Prescriptions from "./pages/Prescriptions";
 import LabTests from "./pages/LabTests";
 import Bills from "./pages/Bills";
 import ManageDoctors from "./pages/ManageDoctors";
-// import Home from "./pages/Home.js";
+import Home from "./pages/Home.js";
 function App() {
   return (
     <Router>
       <Navbar />
 
       <Routes>
-        
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<><Login /><Payments/></>}></Route>
         <Route path="/register" element={<Register />} />
         

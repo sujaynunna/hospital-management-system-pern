@@ -15,7 +15,7 @@ function AppointmentForm({ refresh }) {
 
   return (
     <div className="card p-4 mb-4">
-      <h4 className="mb-3">Book Appointment</h4>
+      
 
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
