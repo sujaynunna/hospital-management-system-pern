@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { getAppointments, updateAppointment } from "../api/api";
+import { getDoctorAppointments, updateAppointment } from "../api/api";
 
 function DoctorDashboard() {
+
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
@@ -9,7 +10,8 @@ function DoctorDashboard() {
   }, []);
 
   const fetchAppointments = async () => {
-    const data = await getAppointments();
+    const doctorId = localStorage.getItem("userId");
+    const data = await getDoctorAppointments(doctorId);
     setAppointments(data);
   };
 
@@ -20,9 +22,9 @@ function DoctorDashboard() {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Doctor Dashboard</h2>
 
-      <div className="card p-4">
+      <h2 className="mb-4">Doctor Dashboard</h2>
+<div className="card p-4">
         <table className="table table-striped table-bordered">
           <thead>
             <tr>
@@ -32,28 +34,27 @@ function DoctorDashboard() {
               <th>Action</th>
             </tr>
           </thead>
-
           <tbody>
-            {appointments.map((appt) => (
-              <tr key={appt.id}>
-                <td>{appt.id}</td>
-                <td>{appt.patient_id}</td>
-                <td>
-                  <span className="badge bg-warning">{appt.status}</span>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-success btn-sm"
-                    onClick={() => handleUpdate(appt.id)}
-                  >
-                    Mark Completed
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {appointments.map((appt) => (
+        <div key={appt.id} className="card p-3 mb-3">
+
+          <p><b>Patient ID:</b> {appt.patient_id}</p>
+          <p><b>Date:</b> {appt.appointment_date}</p>
+          <p><b>Status:</b> {appt.status}</p>
+
+          <button
+            className="btn btn-success"
+            onClick={() => handleUpdate(appt.id)}
+          >
+            Mark Completed
+          </button>
+
+        </div>
+      ))}
+      </tbody>
+      </table>
+
+    </div>
     </div>
   );
 }

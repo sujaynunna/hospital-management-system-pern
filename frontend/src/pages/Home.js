@@ -5,8 +5,8 @@ return (
 <div className="home-container">
 
   <div className="home-content">
-    <h1>Hospital Management System</h1>
-    <p>Book appointments and manage your medical records easily.</p>
+    <h1 style={{color:"yellow",fontWeight:"bold"}}>Hospital Management System</h1>
+    <p style={{color:"pink",fontWeight:"pinkbold"}}>Book appointments and manage your medical records easily.</p>
 
     <div className="mt-3">
       <a href="/login" target="_blank" className="btn btn-primary me-3">

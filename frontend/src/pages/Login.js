@@ -21,8 +21,8 @@ function Login() {
       if (data.role === "patient") navigate("/patient");
       else if (data.role === "doctor") navigate("/doctor");
       else if (data.role === "admin") navigate("/admin");
-    } catch {
-      setError("Invalid email or password");
+    } catch(error) {
+      setError(error.message);
     }
   };
 

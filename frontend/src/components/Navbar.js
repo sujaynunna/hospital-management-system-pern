@@ -5,11 +5,11 @@ function Navbar() {
 
   const logout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/login", { replace: true });
   };
 
   return (
-    <nav className="navbar navbar-expand navbar-dark bg-dark shadow">
+    <nav className="navbar navbar-expand navbar-dark bg-dark shadow sticky-top" >
   <div className="container d-flex justify-content-between align-items-center">
     
     {/* 1. BRAND - Left Side */}
@@ -40,7 +40,7 @@ function Navbar() {
 
     {/* 3. BUTTON - Right Side */}
     <button onClick={logout} className="btn btn-danger btn-sm px-4 shadow-sm">
-      Logout
+     <b>Logout</b> 
     </button>
     
   </div>
