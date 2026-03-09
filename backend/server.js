@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config();    // process.env is global for the entrie node process so every file can access it
 const express = require("express");
 const cors = require("cors");
 

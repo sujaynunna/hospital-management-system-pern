@@ -5,6 +5,8 @@ const pool = require("../db");
 // Get appointments for patient
 router.get("/:userId", async (req,res)=>{
   try{
+      const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+console.log(fullUrl); 
 
     const { userId } = req.params;
 
@@ -12,9 +14,7 @@ router.get("/:userId", async (req,res)=>{
       "SELECT * FROM appointments WHERE patient_id=$1",
       [userId]
     );
-res.send(
-  "hi"
-)
+
     res.json(result.rows);
 
   }catch(err){
@@ -23,7 +23,7 @@ res.send(
   }
 });
 
-// Book appointment
+// patient Books appointment
 router.post("/", async (req,res)=>{
   try{
 
@@ -42,7 +42,7 @@ router.post("/", async (req,res)=>{
   }
 });
 
-// Update appointment status
+// doctor Updates appointment status
 router.put("/:id", async (req,res)=>{
   try{
 
