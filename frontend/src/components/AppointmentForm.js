@@ -7,7 +7,7 @@ function AppointmentForm({ refresh }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await bookAppointment({ doctorId, date });
+    await bookAppointment({ patientId:localStorage.getItem("userId"),doctorId, date });
     setDoctorId("");
     setDate("");
     refresh();
