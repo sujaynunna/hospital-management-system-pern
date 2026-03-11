@@ -8,7 +8,7 @@ function AppointmentForm({ refresh }) {
   const [time, setTime] = useState("");
   const [doctors, setDoctors] = useState([]);
 
-  const userId = localStorage.getItem("userId");
+  const userId = sessionStorage.getItem("userId");
 
   useEffect(() => {
 

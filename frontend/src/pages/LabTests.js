@@ -9,7 +9,7 @@ function LabTests() {
   }, []);
 
  const fetchTests = async () => {
-  const userId = localStorage.getItem("userId");
+  const userId = sessionStorage.getItem("userId");
   const data = await getLabTests(userId);
   setTests(data);
 };

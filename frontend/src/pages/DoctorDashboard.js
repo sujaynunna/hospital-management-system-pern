@@ -10,7 +10,7 @@ function DoctorDashboard() {
   }, []);
 
   const fetchAppointments = async () => {
-    const doctorId = localStorage.getItem("userId");
+    const doctorId = sessionStorage.getItem("userId");
     const data = await getDoctorAppointments(doctorId);
     setAppointments(data);
   };

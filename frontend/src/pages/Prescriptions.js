@@ -9,7 +9,7 @@ function Prescriptions() {
   }, []);
 
   const fetchPrescriptions = async () => {
-    const userId=localStorage.getItem("userId");
+    const userId=sessionStorage.getItem("userId");
     const data = await getPrescriptions(userId);
     setPrescriptions(data);
   };

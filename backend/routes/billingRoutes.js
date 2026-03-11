@@ -19,7 +19,7 @@ router.get("/:userId", async (req, res) => {
        LEFT JOIN payments p ON b.id = p.bill_id
        WHERE pt.user_id=$1
        GROUP BY b.id
-       ORDER BY b.id DESC`,
+       ORDER BY b.id ASC`,
       [userId]
     );
 

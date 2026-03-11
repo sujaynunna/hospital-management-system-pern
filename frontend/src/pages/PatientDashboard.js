@@ -17,7 +17,7 @@ function PatientDashboard() {
   const [labTests, setLabTests] = useState([]);
   const [bills, setBills] = useState([]);
 
-  const userId = localStorage.getItem("userId");
+  const userId = sessionStorage.getItem("userId");
 
   // Use useCallback to prevent infinite loops and satisfy ESLint
   const fetchAppointments = useCallback(async () => {

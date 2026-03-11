@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children, role }) {
 
-  const userRole = localStorage.getItem("role");
+  const userRole = sessionStorage.getItem("role");
 
   // If not logged in
   if (!userRole) {

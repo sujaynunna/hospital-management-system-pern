@@ -4,7 +4,7 @@ function Navbar() {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     navigate("/login", { replace: true });
   };
 

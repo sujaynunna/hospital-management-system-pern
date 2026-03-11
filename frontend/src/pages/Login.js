@@ -28,8 +28,8 @@ function Login() {
       }
 
       // Save login info
-      localStorage.setItem("userId", data.userId);
-      localStorage.setItem("role", data.role);
+      sessionStorage.setItem("userId", data.userId);
+      sessionStorage.setItem("role", data.role);
 
       console.log("Logged in user:", data);
 
