@@ -65,10 +65,11 @@ function Login() {
 
         {error && <div className="alert alert-danger">{error}</div>}
 
+
         <form onSubmit={handleLogin}>
 
           <div className="mb-3">
-            <label className="form-label">Email Address</label>
+            <label className="form-label">Email ujujuj Address</label>
 
             <input
               type="email"
