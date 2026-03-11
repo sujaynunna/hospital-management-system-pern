@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require("../db");
 
 // Get bills
-router.get("/bills/:userId", async (req,res)=>{
+router.get("/:userId", async (req,res)=>{
   const { userId } = req.params;
 
   const result = await pool.query(
