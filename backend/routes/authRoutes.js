@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     const result = await pool.query(
-      "SELECT * FROM users WHERE email=$1",
+      "SELECT * FROM users  WHERE email=$1",
       [email]
     );
 
@@ -55,7 +55,8 @@ router.post("/login", async (req, res) => {
 
     // success
     res.json({
-      userId: user.id,
+      user: user.id,
+      
       role: user.role
     });
 

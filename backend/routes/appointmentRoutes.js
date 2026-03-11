@@ -75,15 +75,26 @@ Patient books appointment
 */
 router.post("/", async (req, res) => {
   try {
-
     const { patientId, doctorId, date, time } = req.body;
+
+    // ✅ Look up actual patient.id from patients table using user_id
+    const patientResult = await pool.query(
+      "SELECT id FROM patients WHERE user_id = $1",
+      [patientId]  // patientId here is actually the userId
+    );
+
+    if (patientResult.rows.length === 0) {
+      return res.status(404).json({ error: "Patient record not found" });
+    }
+
+    const actualPatientId = patientResult.rows[0].id;
 
     const result = await pool.query(
       `INSERT INTO appointments
        (patient_id, doctor_id, appointment_date, appointment_time, status)
        VALUES ($1,$2,$3,$4,'pending')
        RETURNING *`,
-      [patientId, doctorId, date, time]
+      [actualPatientId, doctorId, date, time]  // ✅ use actual patient id
     );
 
     res.json(result.rows[0]);

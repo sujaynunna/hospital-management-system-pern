@@ -9,7 +9,7 @@ function AppointmentForm({ refresh }) {
   const [doctors, setDoctors] = useState([]);
 
   const userId = sessionStorage.getItem("userId");
-
+console.log(userId);
   useEffect(() => {
 
     const fetchDoctors = async () => {
