@@ -4,12 +4,14 @@ import { bookAppointment } from "../api/api";
 function AppointmentForm({ refresh }) {
   const [doctorId, setDoctorId] = useState("");
   const [date, setDate] = useState("");
+  const[time , setTime]=useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await bookAppointment({ patientId:localStorage.getItem("userId"),doctorId, date });
+    await bookAppointment({ patientId:localStorage.getItem("userId"),doctorId,time, date });
     setDoctorId("");
     setDate("");
+    setTime("");
     refresh();
   };
 
@@ -34,6 +36,16 @@ function AppointmentForm({ refresh }) {
           <label className="form-label">Appointment Date</label>
           <input
             type="date"
+            className="form-control"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+          />
+        </div>
+         <div className="mb-3">
+          <label className="form-label">Appointment Time</label>
+          <input
+            type="time"
             className="form-control"
             value={date}
             onChange={(e) => setDate(e.target.value)}

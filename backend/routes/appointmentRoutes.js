@@ -27,11 +27,11 @@ console.log(fullUrl);
 router.post("/", async (req,res)=>{
   try{
 
-    const { patientId, doctorId, date } = req.body;
+    const { patientId, doctorId, time, date } = req.body;
 
     const result = await pool.query(
-      "INSERT INTO appointments (patient_id, doctor_id, appointment_date, status) VALUES ($1,$2,$3,'Pending') RETURNING *",
-      [patientId, doctorId, date]
+      "INSERT INTO appointments (patient_id, doctor_id, appointment_date,appointment_time, status) VALUES ($1,$2,$3,'Pending') RETURNING *",
+      [patientId, doctorId, date , time]
     );
 
     res.json(result.rows[0]);
