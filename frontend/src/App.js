@@ -28,8 +28,8 @@ function App() {
         <Route
           path="/patient"
           element={
-            
-              <PatientDashboard />
+             <ProtectedRoute role="patient"><PatientDashboard /></ProtectedRoute>
+              
             
           }
         />
@@ -37,8 +37,8 @@ function App() {
         <Route
           path="/doctor"
           element={
-            
-              <DoctorDashboard />
+             <ProtectedRoute role="doctor"><DoctorDashboard /></ProtectedRoute>
+              
             
           }
         />
@@ -57,6 +57,7 @@ function App() {
         <Route path="/lab-tests" element={<LabTests />} />
         <Route path="/bills" element={<Bills />} />
         <Route path="/manage-doctors" element={<ManageDoctors />} />
+        <Route path="/payments" element={<Payments />} />
       </Routes>
     </Router>
   );

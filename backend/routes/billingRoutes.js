@@ -60,7 +60,7 @@ router.post("/payments", async (req, res) => {
     const total = result.rows[0].total_amount;
     const paid = result.rows[0].paid;
 
-    let status = "Pending";
+    let status = "unpaid";
 
     if (paid >= total) status = "Paid";
     else if (paid > 0) status = "Partial";

@@ -2,15 +2,32 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-router.get("/medical-records/:userId", async (req,res)=>{
-  const { userId } = req.params;
+router.get("/:userId", async (req,res)=>{
 
-  const result = await pool.query(
-    "SELECT * FROM medical_records WHERE patient_id=$1",
-    [userId]
-  );
+  try{
 
-  res.json(result.rows);
+    const { userId } = req.params;
+
+    const result = await pool.query(
+      `
+      SELECT mr.*
+      FROM medicalrecords mr
+      JOIN appointments a
+      ON mr.appointment_id = a.id
+      WHERE a.patient_id = $1
+      `,
+      [userId]
+    );
+
+    res.json(result.rows);
+
+  }catch(err){
+
+    console.error(err);
+    res.status(500).json({error:"Server error"});
+
+  }
+
 });
 
 module.exports = router;

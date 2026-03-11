@@ -170,6 +170,7 @@ export const makePayment = async (data) => {
 
 // Get all doctors
 export const getDoctors = async () => {
+
   const response = await fetch(`${API_URL}/doctors`);
 
   if (!response.ok) {

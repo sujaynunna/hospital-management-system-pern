@@ -1,29 +1,54 @@
-function AppointmentList({ appointments }) {
+import { updateAppointment } from "../api/api";
+
+function AppointmentList({ appointments, isDoctor, refresh }) {
+
+  const handleComplete = async (id) => {
+    await updateAppointment(id, "completed");
+    refresh();
+  };
+
+  if (!appointments || appointments.length === 0) {
+    return <p>No appointments found</p>;
+  }
+
   return (
-    <div className="card p-4">
-     
+    <div className="list-group">
 
-      <table className="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Doctor ID</th>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
+      {appointments.map((app) => (
 
-        <tbody>
-          {appointments.map((appt) => (
-            <tr key={appt.id}>
-              <td>{appt.doctor_id}</td>
-              <td>{appt.appointment_date}</td>
-              <td>
-                <span className="badge bg-success">{appt.status}</span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        <div key={app.id} className="list-group-item mb-3">
+
+          {isDoctor ? (
+
+            <>
+              <p><b>Patient:</b> {app.patient_name}</p>
+              <p><b>Date:</b> {new Date(app.appointment_date).toLocaleDateString()}</p>
+              <p><b>Status:</b> {app.status}</p>
+
+              {app.status !== "completed" && (
+                <button
+                  className="btn btn-success"
+                  onClick={() => handleComplete(app.id)}
+                >
+                  Mark Completed
+                </button>
+              )}
+            </>
+
+          ) : (
+
+            <>
+              <p><b>Doctor:</b> {app.doctor_name}</p>
+              <p><b>Date:</b> {new Date(app.appointment_date).toLocaleDateString()}</p>
+              <p><b>Status:</b> {app.status}</p>
+            </>
+
+          )}
+
+        </div>
+
+      ))}
+
     </div>
   );
 }
