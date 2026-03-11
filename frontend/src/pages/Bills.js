@@ -10,7 +10,7 @@ function Bills() {
   }, []);
 
   const fetchBills = async () => {
-     const userId=localStorage.getItem("userId");
+    const userId = localStorage.getItem("userId");
     const data = await getBills(userId);
     setBills(data);
   };
@@ -24,7 +24,9 @@ function Bills() {
           <thead>
             <tr>
               <th>Bill ID</th>
-              <th>Total Amount</th>
+              <th>Total</th>
+              <th>Paid</th>
+              <th>Remaining</th>
               <th>Status</th>
               <th>Payment</th>
             </tr>
@@ -35,12 +37,30 @@ function Bills() {
               <tr key={bill.id}>
                 <td>{bill.id}</td>
                 <td>₹{bill.total_amount}</td>
+                <td>₹{bill.amount_paid}</td>
+                <td>₹{bill.amount_left}</td>
+
                 <td>
-                  <span className="badge bg-success">{bill.status}</span>
+                  <span
+                    className={`badge ${
+                      bill.status === "Paid"
+                        ? "bg-success"
+                        : bill.status === "Partial"
+                        ? "bg-warning"
+                        : "bg-danger"
+                    }`}
+                  >
+                    {bill.status}
+                  </span>
                 </td>
+
                 <td>
-                  {bill.status !== "Paid" && (
-                    <Payments billId={bill.id} refresh={fetchBills} />
+                  {bill.amount_left > 0 && (
+                    <Payments
+                      billId={bill.id}
+                      remaining={bill.amount_left}
+                      refresh={fetchBills}
+                    />
                   )}
                 </td>
               </tr>
