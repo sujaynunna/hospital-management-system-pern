@@ -2,21 +2,25 @@ import { updateAppointment } from "../api/api";
 
 function AppointmentList({ appointments, isDoctor, refresh }) {
 
-  const handleComplete = async (id) => {
-    await updateAppointment(id, "completed");
-    refresh();
-  };
-
   if (!appointments || appointments.length === 0) {
     return <p>No appointments found</p>;
   }
 
+  const handleComplete = async (id) => {
+
+    await updateAppointment(id, "completed");
+
+    if (refresh) refresh();
+
+  };
+
   return (
+
     <div className="list-group">
 
       {appointments.map((app) => (
 
-        <div key={app.id} className="list-group-item mb-3">
+        <div key={app.id} className="list-group-item mb-2">
 
           {isDoctor ? (
 
@@ -50,7 +54,9 @@ function AppointmentList({ appointments, isDoctor, refresh }) {
       ))}
 
     </div>
+
   );
+
 }
 
 export default AppointmentList;

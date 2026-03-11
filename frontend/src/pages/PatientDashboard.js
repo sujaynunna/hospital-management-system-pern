@@ -1,5 +1,4 @@
-import { useEffect, useState, useCallback } from "react"; // Added useCallback
-
+import { useEffect, useState, useCallback } from "react";
 import {
   getAppointments,
   getMedicalRecords,
@@ -20,14 +19,13 @@ function PatientDashboard() {
 
   const userId = localStorage.getItem("userId");
 
-  // --- Fetch Functions wrapped in useCallback ---
-
+  // Use useCallback to prevent infinite loops and satisfy ESLint
   const fetchAppointments = useCallback(async () => {
     try {
       const data = await getAppointments(userId);
-      setAppointments(data || []);
+      setAppointments(data || []); // Fallback to empty array
     } catch (err) {
-      console.error("Error fetching appointments", err);
+      console.error("Failed to fetch appointments", err);
     }
   }, [userId]);
 
@@ -36,7 +34,7 @@ function PatientDashboard() {
       const data = await getMedicalRecords(userId);
       setRecords(data || []);
     } catch (err) {
-      console.error("Error fetching medical records", err);
+      console.error("Failed to fetch records", err);
     }
   }, [userId]);
 
@@ -45,7 +43,7 @@ function PatientDashboard() {
       const data = await getPrescriptions(userId);
       setPrescriptions(data || []);
     } catch (err) {
-      console.error("Error fetching prescriptions", err);
+      console.error("Failed to fetch prescriptions", err);
     }
   }, [userId]);
 
@@ -54,7 +52,7 @@ function PatientDashboard() {
       const data = await getLabTests(userId);
       setLabTests(data || []);
     } catch (err) {
-      console.error("Error fetching lab tests", err);
+      console.error("Failed to fetch lab tests", err);
     }
   }, [userId]);
 
@@ -63,24 +61,18 @@ function PatientDashboard() {
       const data = await getBills(userId);
       setBills(data || []);
     } catch (err) {
-      console.error("Error fetching bills", err);
+      console.error("Failed to fetch bills", err);
     }
   }, [userId]);
 
-  // --- Main useEffect ---
-
   useEffect(() => {
-    if (!userId) {
-      console.log("User not logged in");
-      return;
+    if (userId) {
+      fetchAppointments();
+      fetchRecords();
+      fetchPrescriptions();
+      fetchLabTests();
+      fetchBills();
     }
-
-    fetchAppointments();
-    fetchRecords();
-    fetchPrescriptions();
-    fetchLabTests();
-    fetchBills();
-
   }, [userId, fetchAppointments, fetchRecords, fetchPrescriptions, fetchLabTests, fetchBills]);
 
   return (
@@ -94,14 +86,13 @@ function PatientDashboard() {
 
       <div className="card p-3 mb-4">
         <h4>My Appointments</h4>
-        <AppointmentList appointments={appointments} refresh={fetchAppointments}/>
+        <AppointmentList appointments={appointments} />
       </div>
 
       <div className="card p-3 mb-4">
         <h4>Medical Records</h4>
-        {records.length === 0 ? (
-          <p>No records found</p>
-        ) : (
+        {/* Added check to ensure data exists before mapping */}
+        {records?.length > 0 ? (
           records.map((rec) => (
             <div key={rec.id}>
               <p><b>Diagnosis:</b> {rec.diagnosis}</p>
@@ -110,14 +101,12 @@ function PatientDashboard() {
               <hr/>
             </div>
           ))
-        )}
+        ) : <p>No records found.</p>}
       </div>
-
+      {/* Prescriptions */}
       <div className="card p-3 mb-4">
         <h4>Prescriptions</h4>
-        {prescriptions.length === 0 ? (
-          <p>No prescriptions found</p>
-        ) : (
+        {prescriptions?.length > 0 ? (
           prescriptions.map((pre) => (
             <div key={pre.id}>
               <p><b>Record ID:</b> {pre.record_id}</p>
@@ -125,14 +114,15 @@ function PatientDashboard() {
               <hr/>
             </div>
           ))
+        ) : (
+          <p className="text-muted">No prescriptions found.</p>
         )}
       </div>
 
+      {/* Lab Tests */}
       <div className="card p-3 mb-4">
         <h4>Lab Tests</h4>
-        {labTests.length === 0 ? (
-          <p>No lab tests found</p>
-        ) : (
+        {labTests?.length > 0 ? (
           labTests.map((test) => (
             <div key={test.id}>
               <p><b>Test:</b> {test.test_name}</p>
@@ -141,14 +131,15 @@ function PatientDashboard() {
               <hr/>
             </div>
           ))
+        ) : (
+          <p className="text-muted">No lab tests found.</p>
         )}
       </div>
 
+      {/* Bills */}
       <div className="card p-3 mb-4">
         <h4>Bills</h4>
-        {bills.length === 0 ? (
-          <p>No bills found</p>
-        ) : (
+        {bills?.length > 0 ? (
           bills.map((bill) => (
             <div key={bill.id}>
               <p><b>Bill ID:</b> {bill.id}</p>
@@ -159,8 +150,12 @@ function PatientDashboard() {
               <hr/>
             </div>
           ))
+        ) : (
+          <p className="text-muted">No pending or past bills found.</p>
         )}
       </div>
+      {/* Repeat similar conditional rendering for Prescriptions, Lab Tests, and Bills */}
+      
     </div>
   );
 }

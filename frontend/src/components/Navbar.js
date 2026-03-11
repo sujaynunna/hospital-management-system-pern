@@ -42,6 +42,9 @@ function Navbar() {
        <Link className="nav-link px-2" to="/payments" style={{ color: "yellow", fontWeight: "bold" }}>
         payments
       </Link>
+       <Link className="nav-link px-2" to="/admin" style={{ color: "yellow", fontWeight: "bold" }}>
+        admin
+      </Link>
     </div>
 
     {/* 3. BUTTON - Right Side */}

@@ -2,11 +2,9 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-
-// =======================================
-// Get appointments for doctor
-// =======================================
-
+/*
+Get appointments for doctor
+*/
 router.get("/doctor/:userId", async (req, res) => {
   try {
 
@@ -14,12 +12,12 @@ router.get("/doctor/:userId", async (req, res) => {
 
     const result = await pool.query(
       `SELECT 
-          a.id,
-          a.appointment_date,
-          a.appointment_time,
-          a.status,
-          p.id AS patient_id,
-          u.name AS patient_name
+        a.id,
+        a.appointment_date,
+        a.appointment_time,
+        a.status,
+        p.id AS patient_id,
+        u.name AS patient_name
        FROM appointments a
        JOIN patients p ON a.patient_id = p.id
        JOIN users u ON p.user_id = u.id
@@ -38,10 +36,9 @@ router.get("/doctor/:userId", async (req, res) => {
 });
 
 
-// =======================================
-// Get appointments for patient
-// =======================================
-
+/*
+Get appointments for patient
+*/
 router.get("/:userId", async (req, res) => {
   try {
 
@@ -49,16 +46,17 @@ router.get("/:userId", async (req, res) => {
 
     const result = await pool.query(
       `SELECT 
-          a.id,
-          a.appointment_date,
-          a.appointment_time,
-          a.status,
-          d.specialization,
-          u.name AS doctor_name
+        a.id,
+        a.appointment_date,
+        a.appointment_time,
+        a.status,
+        u.name AS doctor_name,
+        d.specialization
        FROM appointments a
        JOIN doctors d ON a.doctor_id = d.id
        JOIN users u ON d.user_id = u.id
-       WHERE a.patient_id = $1
+       JOIN patients p ON a.patient_id = p.id
+       WHERE p.user_id = $1
        ORDER BY a.appointment_date`,
       [userId]
     );
@@ -72,19 +70,18 @@ router.get("/:userId", async (req, res) => {
 });
 
 
-// =======================================
-// Patient books appointment
-// =======================================
-
+/*
+Patient books appointment
+*/
 router.post("/", async (req, res) => {
   try {
 
     const { patientId, doctorId, date, time } = req.body;
 
     const result = await pool.query(
-      `INSERT INTO appointments 
-       (patient_id, doctor_id, appointment_date, appointment_time, status) 
-       VALUES ($1,$2,$3,$4,'pending') 
+      `INSERT INTO appointments
+       (patient_id, doctor_id, appointment_date, appointment_time, status)
+       VALUES ($1,$2,$3,$4,'pending')
        RETURNING *`,
       [patientId, doctorId, date, time]
     );
@@ -98,10 +95,9 @@ router.post("/", async (req, res) => {
 });
 
 
-// =======================================
-// Doctor updates appointment status
-// =======================================
-
+/*
+Doctor updates appointment status
+*/
 router.put("/:id", async (req, res) => {
   try {
 
@@ -109,7 +105,10 @@ router.put("/:id", async (req, res) => {
     const { id } = req.params;
 
     const result = await pool.query(
-      "UPDATE appointments SET status=$1 WHERE id=$2 RETURNING *",
+      `UPDATE appointments
+       SET status=$1
+       WHERE id=$2
+       RETURNING *`,
       [status, id]
     );
 
@@ -120,6 +119,5 @@ router.put("/:id", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-
 
 module.exports = router;

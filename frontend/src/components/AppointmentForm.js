@@ -10,16 +10,11 @@ function AppointmentForm({ refresh }) {
 
   const userId = localStorage.getItem("userId");
 
-  // Fetch doctors when component loads
   useEffect(() => {
 
     const fetchDoctors = async () => {
-      try {
-        const data = await getDoctors();
-        setDoctors(data);
-      } catch (err) {
-        console.error("Error fetching doctors", err);
-      }
+      const data = await getDoctors();
+      setDoctors(data);
     };
 
     fetchDoctors();
@@ -30,26 +25,18 @@ function AppointmentForm({ refresh }) {
 
     e.preventDefault();
 
-    try {
+    await bookAppointment({
+      patientId: userId,
+      doctorId,
+      date,
+      time
+    });
 
-      await bookAppointment({
-        patientId: userId,
-        doctorId,
-        date,
-        time
-      });
+    setDoctorId("");
+    setDate("");
+    setTime("");
 
-      setDoctorId("");
-      setDate("");
-      setTime("");
-
-      refresh();
-
-    } catch (err) {
-
-      console.error("Booking failed", err);
-
-    }
+    refresh();
 
   };
 
@@ -58,8 +45,7 @@ function AppointmentForm({ refresh }) {
     <form onSubmit={handleSubmit}>
 
       <div className="mb-3">
-
-        <label className="form-label">Select Doctor</label>
+        <label>Select Doctor</label>
 
         <select
           className="form-control"
@@ -67,7 +53,6 @@ function AppointmentForm({ refresh }) {
           onChange={(e) => setDoctorId(e.target.value)}
           required
         >
-
           <option value="">Choose Doctor</option>
 
           {doctors.map((doc) => (
@@ -79,12 +64,10 @@ function AppointmentForm({ refresh }) {
           ))}
 
         </select>
-
       </div>
 
       <div className="mb-3">
-
-        <label className="form-label">Date</label>
+        <label>Date</label>
 
         <input
           type="date"
@@ -93,12 +76,10 @@ function AppointmentForm({ refresh }) {
           onChange={(e) => setDate(e.target.value)}
           required
         />
-
       </div>
 
       <div className="mb-3">
-
-        <label className="form-label">Time</label>
+        <label>Time</label>
 
         <input
           type="time"
@@ -107,7 +88,6 @@ function AppointmentForm({ refresh }) {
           onChange={(e) => setTime(e.target.value)}
           required
         />
-
       </div>
 
       <button className="btn btn-primary">
