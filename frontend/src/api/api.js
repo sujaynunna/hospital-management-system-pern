@@ -105,6 +105,7 @@ export const getDoctors = async () => {
 };
 
 export const addDoctor = async (data) => {
+
   const res = await fetch(`${API_URL}/doctors`, {
     method: "POST",
     headers: {
@@ -113,7 +114,12 @@ export const addDoctor = async (data) => {
     body: JSON.stringify(data),
   });
 
+  if (!res.ok) {
+    throw new Error("Failed to add doctor");
+  }
+
   return res.json();
+
 };
 
 export const deleteDoctor = async (id) => {
