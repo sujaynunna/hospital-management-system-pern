@@ -24,7 +24,7 @@ function Login() {
 
       // Validate backend response
       if (!data || !data.userId || !data.role) {
-        throw new Error("Invalid server response");
+        throw new Error("Invalid serverrr response");
       }
 
       // Save login info
@@ -69,7 +69,7 @@ function Login() {
         <form onSubmit={handleLogin}>
 
           <div className="mb-3">
-            <label className="form-label">Email ujujuj Address</label>
+            <label className="form-label">Email  Address</label>
 
             <input
               type="email"

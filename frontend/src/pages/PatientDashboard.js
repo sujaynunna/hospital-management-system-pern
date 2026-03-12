@@ -69,7 +69,7 @@ function PatientDashboard() {
     if (userId) {
       fetchAppointments();
       fetchRecords();
-      fetchPrescriptions();
+      setTimeout(()=>{fetchPrescriptions();},5000)
       fetchLabTests();
       fetchBills();
     }
